@@ -10,17 +10,19 @@ import random as r
 
 Path = "/Users/niteesh/chromedriver"
 driver = webdriver.Chrome(Path)
+nt = input("Whats your USERNAME?")
+np = input("Whats your PASSWORD")
 driver.maximize_window()
 
 driver.get("https://www.delugerpg.com/login")
 
 
 login = driver.find_element_by_name("username")
-login.send_keys("barre")
+login.send_keys(nt)
 login = driver.find_element_by_name("password")
-login.send_keys("narayana")
+login.send_keys(np)
 login.send_keys(Keys.RETURN)
-time.sleep(5)
+time.sleep(4)
 maps = ["https://www.delugerpg.com/map/overworld1","https://www.delugerpg.com/map/overworld2","https://www.delugerpg.com/map/overworld3",
 "https://www.delugerpg.com/map/overworld4","https://www.delugerpg.com/map/overworld5","https://www.delugerpg.com/map/overworld6",
 "https://www.delugerpg.com/map/overworld7","https://www.delugerpg.com/map/overworld8","https://www.delugerpg.com/map/overworld9",
@@ -40,9 +42,11 @@ maps = ["https://www.delugerpg.com/map/overworld1","https://www.delugerpg.com/ma
 "https://www.delugerpg.com/map/volcano2",]
 
 mapselect = r.choice(maps)
+
 driver.get(mapselect)
 
 def pokemonCatching():
+    # time.sleep(3)
     directions = ["move_north-west","move_north","move_north-east","move_south-west","move_south-east","move_west",
     "move_east","move_south"]
     i = 0
@@ -59,43 +63,53 @@ def pokemonCatching():
             
             
         except:
-            move.click()
+            try:
+                move.click()
+            except:
+                move.click()    
             found = False
 
         if found == True:
 
             catch = driver.find_element_by_class_name("btn-catch-action")
             catch.click()
-            time.sleep(3)
+            time.sleep(4)
             battle = driver.find_element_by_class_name("btn-battle-action")
             battle.click()
             time.sleep(3)
-            ball = driver.find_element_by_id("item-pokeball")
+            ball = driver.find_element_by_id("item-masterball")
             ball.click()
             
             throw = driver.find_element_by_xpath("//*[@id=\"itemwrap\"]/div[1]/form/div[2]/input[2]")
             throw.click()
-            caught = False
             time.sleep(3)
-            while caught == False:
-                time.sleep(2)
+            driver.get(mapselect)
+            # caught = False
+            # while caught == False:
+                
 
-                try:
-                    back = driver.find_element_by_xpath("//*[@id=\"battle\"]/div[1]/a[3]")
-                    back.click()    
-                    continu = driver.find_element_by_xpath("//*[@id=\"attack\"]/div/form/div/input[1]")    
-                    continu.click()
+                # try:
+                #     continu = driver.find_element_by_xpath("//*[@id=\"attack\"]/div/form/div/input[1]")    
+                #     continu.click()
                     
                     
-                except:                    
-                    throw = driver.find_element_by_xpath("//*[@id=\"itemwrap\"]/div[1]/form/div[2]/input[2]")
-                    throw.click()
-                    caught = False
-                        
+                # except:                    
+                #     # back = driver.find_element_by_xpath("//*[@id=\"battle\"]/div[1]/a")
+                #     # back.click()
+                #     driver    
+                #     caught = True
+                #     break
+                    
+    
+                   
+                        # //*[@id="battle"]/div[1]/a
+
                        
                     
-
-pokemonCatching()      
+j=0
+while j <1000:
+    pokemonCatching()      
+    j+=1
                        
 
                     
